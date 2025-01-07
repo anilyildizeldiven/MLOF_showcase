@@ -236,24 +236,18 @@ digraph ImputationOptimization {
   {rank = same; SequentialImputation; AdvancedModels; CrossValidation; FeatureEngineering; EnsembleMethods}
   {rank = same; IncreaseAccuracy; PreserveVariance; EnhancePerformance}
 
-  # Verbindungen (Pfeile)
-  SequentialImputation -> IncreaseAccuracy
-  SequentialImputation -> PreserveVariance
+  # Entfernen von individuellen Pfeilen und Hinzufügen eines großen Pfeils
+  node [shape = point, width=0]
+  invisible1 [label = '']
+  invisible2 [label = '']
 
-  AdvancedModels -> IncreaseAccuracy
-  AdvancedModels -> EnhancePerformance
+  invisible1 -> invisible2 [arrowhead = none]
+  invisible1 -> invisible2 [label = '', penwidth = 3, arrowhead = normal]
 
-  CrossValidation -> EnhancePerformance
-
-  FeatureEngineering -> PreserveVariance
-  FeatureEngineering -> EnhancePerformance
-
-  EnsembleMethods -> IncreaseAccuracy
-  EnsembleMethods -> PreserveVariance
-  EnsembleMethods -> EnhancePerformance
+  invisible1 -> {SequentialImputation AdvancedModels CrossValidation FeatureEngineering EnsembleMethods} [arrowhead = none]
+  invisible2 -> {IncreaseAccuracy PreserveVariance EnhancePerformance} [arrowhead = none]
 }
 "
 
 # Render das Diagramm
 DiagrammeR::grViz(graph_code)
-
